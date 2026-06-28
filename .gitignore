@@ -1,0 +1,10 @@
+# Archivos compilados - No subir por rubrica
+*.class
+*.o
+/out/
+/build/
+/target/
+
+# Archivos autogenerados por IntelliJ - No subir por rubrica
+.idea/
+*.im
