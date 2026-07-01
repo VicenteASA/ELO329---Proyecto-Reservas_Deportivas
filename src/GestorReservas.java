@@ -5,6 +5,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Clase encargada de administrar la lógica de negocio.
+ * Controla la lectura/escritura del archivo txt y valida el limite de reservas.
+ */
+
 public class GestorReservas {
     private List<Reserva> listaReservas;
     private final int MAX_RESERVAS_ALUMNO = 3;
@@ -27,7 +32,7 @@ public class GestorReservas {
         StringBuilder sb = new StringBuilder();
         boolean encontrado = false;
         for (Reserva r : listaReservas) {
-            // AHORA FILTRAMOS POR DÍA Y POR CANCHA
+            //AHORA FILTRAMOS POR DÍA Y POR CANCHA
             if (r.getDiaSemana().equalsIgnoreCase(dia) &&
                     r.getCancha().getIdCancha().equalsIgnoreCase(nombreCancha) &&
                     r.getUsuario().getNombre().equalsIgnoreCase("DISPONIBLE")) {
@@ -52,12 +57,12 @@ public class GestorReservas {
                     r.getDiaSemana().equalsIgnoreCase(dia) &&
                     r.getBloque() == bloque) {
 
-                // Si no está disponible, retornamos false inmediatamente
+                //Si no está disponible, retornamos false inmediatamente
                 if (!r.getUsuario().getNombre().equalsIgnoreCase("DISPONIBLE")) {
                     return false;
                 }
 
-                // Si llegamos aquí es porque está DISPONIBLE, reservamos y salimos
+                //Si llegamos aquí es porque está DISPONIBLE, reservamos y salimos
                 r.setUsuario(usuario);
                 return true;
             }
@@ -79,7 +84,7 @@ public class GestorReservas {
         this.listaReservas.clear();
         String separador = ",";
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
-            br.readLine(); // Salta encabezado
+            br.readLine();
             String linea;
             while ((linea = br.readLine()) != null) {
                 if (linea.trim().isEmpty()) continue;

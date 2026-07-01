@@ -6,10 +6,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Clase encargada de gestionar la interfaz gráfica de usuario (GUI) mediante JavaFX.
+ * Controla el flujo visual desde el inicio de sesión hasta la gestión de reservas.
+ */
+
 public class MainGUI extends Application {
 
     private GestorReservas sistema = new GestorReservas();
     private Usuario alumnoActual;
+
+    /**
+     * Metodo principal de JavaFX que inicializa la aplicación.
+     * Carga los datos del archivo y muestra la ventana de validación de Rol USM.
+     */
+
     @Override
     public void start(Stage primaryStage) {
         sistema.cargarDesdeCSV("horario_canchas_modificado.txt");
@@ -61,7 +72,6 @@ public class MainGUI extends Application {
         loginStage.setScene(new Scene(loginGrid, 300, 150));
         loginStage.show();
     }
-
     private void abrirVentanaPrincipal(Stage primaryStage) {
         primaryStage.setTitle("Smart Canchas USM");
 
@@ -163,6 +173,11 @@ public class MainGUI extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Punto de entrada principal de la aplicación.
+     * Lanza el ciclo de vida de JavaFX e inicializa la interfaz gráfica.
+     *
+     */
     public static void main(String[] args) {
         launch(args);
     }
