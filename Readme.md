@@ -29,6 +29,16 @@ Debido a la integración con JavaFX mediante Maven, siga estos pasos para ejecut
 4. **Punto de Entrada (¡Importante!):** **NO** ejecute la clase `MainGUI`. Para iniciar el programa, debe ejecutar la clase **`Launcher.java`**. Esta clase actúa como un envoltorio que inicializa correctamente el entorno gráfico de JavaFX.
 5. **Ejecutar:** Haga clic derecho sobre `Launcher.java` en la carpeta `src` y seleccione `Run 'Launcher.main()'`.
 
+### Uso del Makefile (IMPORTANTE: UTILIZAR SU PROPIA RUTA LOCAL DE LIBRERÍAS JAVAFX)
+
+Para ejecutarlo vía consola:
+1. Abra el archivo `Makefile`.
+2. Edite la variable `JAVAFX_PATH` con la ruta local donde se encuentran sus librerías de JavaFX. Si usted también utiliza Maven, la ruta típicamente será su repositorio local, por ejemplo:
+   `JAVAFX_PATH = "~/.m2/repository/org/openjfx/javafx-controls/21/"` o la ruta hacia su SDK descargado manualmente.
+3. Ejecute `make compile` para compilar las clases en la carpeta `out`.
+4. Ejecute `make run` para iniciar la aplicación.
+5. Ejecute `make clean` para eliminar los archivos compilados generados.
+
 ## Autores
 
 * **Vicente Agustín Araneda Sáez** 
