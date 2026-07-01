@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Proyecto - Smart Canchas USM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 40px auto;
+            max-width: 900px;
+            color: #333;
+            padding: 0 20px;
+        }
+        h1 { color: #003366; border-bottom: 2px solid #003366; padding-bottom: 10px; }
+        h2 { color: #004488; margin-top: 30px; border-left: 4px solid #004488; padding-left: 10px; }
+        h3 { color: #0055aa; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #bbb; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .img-container { text-align: center; margin: 20px 0; }
+        img { max-width: 100%; height: auto; max-width: 600px; border: 1px solid #ddd; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); }
+        .caption { font-size: 0.9em; color: #666; font-style: italic; margin-top: 5px; }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        ul, ol { margin-bottom: 20px; }
+        .autores { background-color: #f9f9f9; padding: 15px; border-left: 4px solid #28a745; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+
+    <h1>Informe de Proyecto: Smart Canchas USM</h1>
+    
+    <div class="autores">
+        <strong>Equipo de Desarrollo:</strong>
+        <ul>
+            <li>Vicente Agustín Araneda Sáez</li>
+            <li>Alex Espinosa</li>
+            <li>Antonio Bahamondes Velásquez</li>
+        </ul>
+    </div>
+
+    <nav>
+        <h3>Índice de Contenidos</h3>
+        <ul>
+            <li><a href="#descripcion">1. Descripción del Problema</a></li>
+            <li><a href="#analisis">2. Análisis del Problema</a></li>
+            <li><a href="#requerimientos">3. Definición de Requerimientos</a></li>
+            <li><a href="#diseno">4. Diseño de la Solución</a></li>
+            <li><a href="#pruebas">5. Pruebas y Dificultades</a></li>
+            <li><a href="#codigo">6. Código Fuente y Repositorio</a></li>
+        </ul>
+    </nav>
+
+    <!-- 1. DESCRIPCIÓN DEL PROBLEMA (10 Puntos) -->
+    <h2 id="descripcion">1. Descripción del Problema</h2>
+    <p>
+        Actualmente, la gestión de los recintos deportivos en la universidad se realiza mediante hojas de cálculo, un método manual que carece de control de concurrencia y visibilidad en tiempo real. Esto genera conflictos de agenda, errores en la asignación y una alta carga administrativa. Nuestro proyecto resuelve esta necesidad implementando un sistema inteligente orientado a objetos (Smart Canchas USM) que automatiza el flujo de reservas, garantizando la integridad de los datos y proporcionando una interfaz gráfica eficiente para un acceso equitativo.
+    </p>
+
+    <!-- 2. ANÁLISIS DEL PROBLEMA (10 Puntos) -->
+    <h2 id="analisis">2. Análisis del Problema</h2>
+    <p>
+        El problema se sitúa en el contexto universitario, específicamente en la administración de la infraestructura deportiva. El sistema actual centralizado en Excel es precario al no validar automáticamente la disponibilidad, permitiendo que dos personas reserven la misma cancha a la misma hora.
+    </p>
+    <p>
+        Para modelar y dar solución a esto, se definieron los siguientes entes o elementos principales que interactúan en el sistema: <strong>Cancha</strong> (con atributos como tipo de piso o si es techada), <strong>Reserva</strong>, <strong>Cliente</strong> (Estudiante validado por Rol USM) y <strong>ComplejoDeportivo</strong>. El sistema interactúa con el medio externo a través de una interfaz gráfica (desarrollada en JavaFX) y asegura la persistencia de datos leyendo y escribiendo en un archivo de texto plano (<code>horario_canchas_modificado.txt</code>), lo que permite manejar la concurrencia y evaluar la disponibilidad en tiempo real aplicando los principios de encapsulamiento y modularidad.
+    </p>
+
+    <!-- 3. DEFINICIÓN DE REQUERIMIENTOS (20 Puntos) -->
+    <h2 id="requerimientos">3. Definición de Requerimientos</h2>
+    <p>El sistema cuenta con validación de formato para el Rol USM y una regla de negocio que limita a 3 las reservas activas por usuario. A continuación se presentan los tres casos de uso principales:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Caso de Uso</th>
+                <th>Descripción / Flujo Principal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CU-01</td>
+                <td>Consultar Disponibilidad</td>
+                <td>El estudiante accede al sistema y visualiza en tiempo real los bloques horarios disponibles para los distintos recintos deportivos, filtrando según el estado actual de las canchas.</td>
+            </tr>
+            <tr>
+                <td>CU-02</td>
+                <td>Realizar Reserva</td>
+                <td>El estudiante selecciona un bloque disponible y confirma su reserva. El sistema valida el control de concurrencia y que el estudiante no exceda el límite de 3 reservas activas. Si es exitoso, los datos persisten automáticamente en el archivo.</td>
+            </tr>
+            <tr>
+                <td>CU-03</td>
+                <td>Cancelar Reserva</td>
+                <td>El estudiante visualiza sus reservas activas y selecciona una para anularla. El sistema libera el bloque horario de la cancha seleccionada, dejándola disponible inmediatamente para el resto de la comunidad universitaria.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 4. DISEÑO (20 Puntos) -->
+    <h2 id="diseno">4. Diseño de la Solución</h2>
+    
+    <h3>Diagrama de Clases</h3>
+    <p>El siguiente diagrama ilustra la arquitectura de nuestra solución orientada a objetos. Se observa cómo las entidades principales (Cliente, Cancha, Reserva) se relacionan y encapsulan sus atributos y métodos, separando la lógica de negocio de la interfaz gráfica implementada en JavaFX.</p>
+    <div class="img-container">
+        <!-- REEMPLAZAR LA IMAGEN CUANDO LA TENGAN -->
+        <img src="images/diagrama_clases.png" alt="Diagrama de Clases UML">
+        <div class="caption">Figura 1: Diagrama de clases de Smart Canchas USM.</div>
+    </div>
+
+    <h3>Diagrama de Secuencia</h3>
+    <p>A continuación se detalla la interacción de los objetos a lo largo del tiempo para el Caso de Uso de <strong>Realizar Reserva</strong>, mostrando la validación de concurrencia y el límite de reservas por usuario.</p>
+    <div class="img-container">
+        <!-- REEMPLAZAR LA IMAGEN CUANDO LA TENGAN -->
+        <img src="images/diagrama_secuencia.png" alt="Diagrama de Secuencia UML">
+        <div class="caption">Figura 2: Diagrama de secuencia para realizar una reserva.</div>
+    </div>
+
+    <!-- 5. PRUEBAS, DIFICULTADES Y BUGS (10 Puntos) -->
+    <h2 id="pruebas">5. Resultados de Pruebas y Dificultades</h2>
+    
+    <h3>Resultados de las Pruebas de Software</h3>
+    <p>Las pruebas se enfocaron en validar la manipulación de listas y condiciones en POO a través de la interfaz. La siguiente captura evidencia el control de la lógica de negocio al intentar exceder el límite permitido de agendamientos.</p>
+    <div class="img-container">
+        <!-- REEMPLAZAR LA IMAGEN CUANDO LA TENGAN -->
+        <img src="images/prueba_caso1.png" alt="Captura de pantalla de la prueba en JavaFX">
+        <div class="caption">Figura 3: Ejecución de prueba validando el límite máximo de 3 reservas activas.</div>
+    </div>
+
+    <h3>Dificultades Superadas</h3>
+    <ul>
+        <li><strong>Control de Concurrencia y Persistencia:</strong> Sincronizar correctamente la lectura y escritura en el archivo <code>horario_canchas_modificado.txt</code> para evitar que dos usuarios reservaran el mismo bloque simultáneamente o se sobrescribieran datos si el archivo estaba en uso.</li>
+        <li><strong>Integración con JavaFX:</strong> Configurar correctamente las dependencias gráficas y asegurar que la vista se actualizara dinámicamente al cambiar el estado de las canchas en el backend.</li>
+    </ul>
+
+    <h3>Listado de Bugs Presentes</h3>
+    <ul>
+        <li>No se registran bugs conocidos que afecten el flujo principal a la fecha de entrega.</li>
+    </ul>
+
+    <!-- 6. ENLACE AL CÓDIGO FUENTE (15 Puntos) -->
+    <h2 id="codigo">6. Enlace al Código Fuente y Repositorio</h2>
+    <p>El proyecto completo, incluyendo el código fuente desarrollado en Java, el archivo README y la configuración del IDE se encuentra disponible de forma pública:</p>
+    <p>
+        <strong>Repositorio GitHub:</strong> <a href="https://github.com/VicenteASA/ELO329---Proyecto-Reservas_Deportivas" target="_blank">https://github.com/VicenteASA/ELO329---Proyecto-Reservas_Deportivas</a>
+    </p>
+    <p><em>Nota: La implementación se documentó directamente en el código fuente. Las instrucciones de ejecución, el archivo base de persistencia y la configuración del JDK/JavaFX están detalladas en la raíz del repositorio. No se incluye código generado (archivos .class).</em></p>
+
+</body>
+</html>
