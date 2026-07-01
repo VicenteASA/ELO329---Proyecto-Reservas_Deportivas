@@ -13,14 +13,24 @@ Sistema de gestión de reservas de recintos deportivos para la Universidad Técn
     * Control de concurrencia para evitar doble agendamiento.
 * **Interfaz Gráfica:** Desarrollada en **JavaFX** para una experiencia de usuario intuitiva.
 
-## Requisitos de Ejecución
+## Requisitos de Ejecución y Entorno
 
-1. **JDK:** Tener instalado Java Development Kit (recomendado versión 17 o superior).
-2. **JavaFX:** Asegurarse de tener configuradas las librerías de JavaFX en su IDE.
-3. **Archivos:** El archivo `horario_canchas_modificado.txt` debe encontrarse en la carpeta raíz del proyecto para que el sistema cargue los datos correctamente.
+1. **JDK:** El proyecto fue desarrollado y probado utilizando **Oracle OpenJDK 26**.
+2. **Librerías de Interfaz:** El proyecto requiere **JavaFX**. Se configuró utilizando **Maven con JavaFX versión 21** (`org.openjfx:javafx-controls:21`). Si utiliza un IDE como IntelliJ IDEA, asegúrese de recargar las dependencias de Maven.
+3. **Persistencia:** El archivo `horario_canchas_modificado.txt` debe encontrarse obligatoriamente en la carpeta raíz del proyecto al momento de ejecutarlo.
+
+## Instrucciones de Compilación y Ejecución (IntelliJ IDEA)
+
+Debido a la integración con JavaFX mediante Maven, siga estos pasos para ejecutar el sistema correctamente sin errores de módulos:
+
+1. **Clonar el repositorio:** Descargue el proyecto y ábralo en su IDE.
+2. **Verificar el JDK:** Vaya a `File > Project Structure > Project` y asegúrese de tener asignado **Oracle OpenJDK 26** (o el SDK correspondiente de su entorno).
+3. **Configurar dependencias:** Permita que IntelliJ sincronice las dependencias (Maven recargará automáticamente los módulos de JavaFX 21).
+4. **Punto de Entrada (¡Importante!):** **NO** ejecute la clase `MainGUI`. Para iniciar el programa, debe ejecutar la clase **`Launcher.java`**. Esta clase actúa como un envoltorio que inicializa correctamente el entorno gráfico de JavaFX.
+5. **Ejecutar:** Haga clic derecho sobre `Launcher.java` en la carpeta `src` y seleccione `Run 'Launcher.main()'`.
 
 ## Autores
 
-* **Vicente Agustín Araneda Sáez**
+* **Vicente Agustín Araneda Sáez** 
 * **Alex Espinosa**
 * **Antonio Bahamondes Velásquez**
