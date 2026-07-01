@@ -53,13 +53,13 @@
         </ul>
     </nav>
 
-    <!-- 1. DESCRIPCIÓN DEL PROBLEMA (10 Puntos) -->
+    <!-- 1. DESCRIPCIÓN DEL PROBLEMA -->
     <h2 id="descripcion">1. Descripción del Problema</h2>
     <p>
         Actualmente, la gestión de los recintos deportivos en la universidad se realiza mediante hojas de cálculo, un método manual que carece de control de concurrencia y visibilidad en tiempo real. Esto genera conflictos de agenda, errores en la asignación y una alta carga administrativa. Nuestro proyecto resuelve esta necesidad implementando un sistema inteligente orientado a objetos (Smart Canchas USM) que automatiza el flujo de reservas, garantizando la integridad de los datos y proporcionando una interfaz gráfica eficiente para un acceso equitativo.
     </p>
 
-    <!-- 2. ANÁLISIS DEL PROBLEMA (10 Puntos) -->
+    <!-- 2. ANÁLISIS DEL PROBLEMA-->
     <h2 id="analisis">2. Análisis del Problema</h2>
     <p>
         El problema se sitúa en el contexto universitario, específicamente en la administración de la infraestructura deportiva. El sistema actual centralizado en Excel es precario al no validar automáticamente la disponibilidad, permitiendo que dos personas reserven la misma cancha a la misma hora.
@@ -68,7 +68,7 @@
         Para modelar y dar solución a esto, se definieron los siguientes entes o elementos principales que interactúan en el sistema: <strong>Cancha</strong> (con atributos como tipo de piso o si es techada), <strong>Reserva</strong>, <strong>Cliente</strong> (Estudiante validado por Rol USM) y <strong>ComplejoDeportivo</strong>. El sistema interactúa con el medio externo a través de una interfaz gráfica (desarrollada en JavaFX) y asegura la persistencia de datos leyendo y escribiendo en un archivo de texto plano (<code>horario_canchas_modificado.txt</code>), lo que permite manejar la concurrencia y evaluar la disponibilidad en tiempo real aplicando los principios de encapsulamiento y modularidad.
     </p>
 
-    <!-- 3. DEFINICIÓN DE REQUERIMIENTOS (20 Puntos) -->
+    <!-- 3. DEFINICIÓN DE REQUERIMIENTOS -->
     <h2 id="requerimientos">3. Definición de Requerimientos</h2>
     <p>El sistema cuenta con validación de formato para el Rol USM y una regla de negocio que limita a 3 las reservas activas por usuario. A continuación se presentan los tres casos de uso principales:</p>
     
@@ -99,13 +99,12 @@
         </tbody>
     </table>
 
-    <!-- 4. DISEÑO (20 Puntos) -->
+    <!-- 4. DISEÑO -->
     <h2 id="diseno">4. Diseño de la Solución</h2>
     
     <h3>Diagrama de Clases</h3>
     <p>El siguiente diagrama ilustra la arquitectura de nuestra solución orientada a objetos. Se observa cómo las entidades principales (Cliente, Cancha, Reserva) se relacionan y encapsulan sus atributos y métodos, separando la lógica de negocio de la interfaz gráfica implementada en JavaFX.</p>
     <div class="img-container">
-        <!-- REEMPLAZAR LA IMAGEN CUANDO LA TENGAN -->
         <img src="images/diagrama_clases.png" alt="Diagrama de Clases UML">
         <div class="caption">Figura 1: Diagrama de clases de Smart Canchas USM.</div>
     </div>
@@ -113,38 +112,69 @@
     <h3>Diagrama de Secuencia</h3>
     <p>A continuación se detalla la interacción de los objetos a lo largo del tiempo para el Caso de Uso de <strong>Realizar Reserva</strong>, mostrando la validación de concurrencia y el límite de reservas por usuario.</p>
     <div class="img-container">
-        <!-- REEMPLAZAR LA IMAGEN CUANDO LA TENGAN -->
         <img src="images/diagrama_secuencia.png" alt="Diagrama de Secuencia UML">
         <div class="caption">Figura 2: Diagrama de secuencia para realizar una reserva.</div>
     </div>
 
     <!-- 5. PRUEBAS, DIFICULTADES Y BUGS (10 Puntos) -->
     <h2 id="pruebas">5. Resultados de Pruebas y Dificultades</h2>
-    
-    <h3>Resultados de las Pruebas de Software</h3>
-    <p>Las pruebas se enfocaron en validar la manipulación de listas y condiciones en POO a través de la interfaz. La siguiente captura evidencia el control de la lógica de negocio al intentar exceder el límite permitido de agendamientos.</p>
+
+    <h3>Resultados de las Pruebas de Software (Casos de Uso)</h3>
+    <p>A continuación se presentan las capturas de pantalla de las pruebas funcionales para los tres casos de uso definidos, validando la correcta comunicación entre la interfaz gráfica y la persistencia de datos:</p>
+
+    <strong>Caso 1: Disponibilidad de canchas para agendar</strong>
+
     <div class="img-container">
-        <!-- REEMPLAZAR LA IMAGEN CUANDO LA TENGAN -->
-        <img src="images/prueba_caso1.png" alt="Captura de pantalla de la prueba en JavaFX">
-        <div class="caption">Figura 3: Ejecución de prueba validando el límite máximo de 3 reservas activas.</div>
+        <img src="images/prueba_c1_01.png" alt="Prueba C-01: Consultar Disponibilidad">
+        <div class="caption">Figura 3: Ejemplo de Cancha 1 con su interfaz principal mostrando la grilla de disponibilidad de recintos deportivos en tiempo real.</div>
+        <img src="images/prueba_c1_02.png" alt="Prueba C-02: Consultar Disponibilidad">
+        <div class="caption">Figura 4: Ejemplo de Cancha 2 con su interfaz principal mostrando la grilla de disponibilidad de recintos deportivos en tiempo real..</div>
+    </div>
+
+    <strong>Caso 2: Demostración de sistema de reserva y límite de 3 reservas por rol</strong>
+
+    <div class="img-container">
+        <img src="images/prueba_c2_01.png" alt="Prueba C-01: Realizar Reserva">
+        <div class="caption">Figura 5: Sistema de reserva en funcionamiento.</div>
+        <img src="images/prueba_c2_02.png" alt="Prueba C-02: Realizar Reserva">
+        <div class="caption">Figura 6: Sistema demuestra que la cancha agendada previamente ya no está disponible.</div>
+        <img src="images/prueba_c2_03.png" alt="Prueba C-03: Limite de reservas">
+        <div class="caption">Figura 7: Al agendar 3 canchas consecutivas, el sistema ya no permite agendar otra.</div>
+    </div>
+
+    <strong>Caso 3: Cancelación de reserva y actualización del archivo .txt</strong>
+
+    <div class="img-container">
+        <img src="images/prueba_c3_01.png" alt="Prueba C-01: Cancelar Reserva">
+        <div class="caption">Figura 8: Confirmación exitosa de la cancelación de una reserva, liberando inmediatamente el bloque en el sistema.</div>
+        <img src="images/prueba_c3_02.png" alt="Prueba C-02: Cancelar Reserva">
+        <div class="caption">Figura 9: El sistema demuestra que guardó la operación anterior y permite al usuario agendar una nueva cancha al tener solo 2 agendadas en total.</div>
+        <img src="images/prueba_c3_03.png" alt="Prueba C-03: Actualizar .txt">
+        <div class="caption">Figura 10: Actualización del archivo horarios_canchas_modificado.txt con el rol elegido y distintivo "Estudiante USM" con sus agendamientos hechos anteriormente.</div>
     </div>
 
     <h3>Dificultades Superadas</h3>
     <ul>
-        <li><strong>Control de Concurrencia y Persistencia:</strong> Sincronizar correctamente la lectura y escritura en el archivo <code>horario_canchas_modificado.txt</code> para evitar que dos usuarios reservaran el mismo bloque simultáneamente o se sobrescribieran datos si el archivo estaba en uso.</li>
-        <li><strong>Integración con JavaFX:</strong> Configurar correctamente las dependencias gráficas y asegurar que la vista se actualizara dinámicamente al cambiar el estado de las canchas en el backend.</li>
+        <li><strong>Desacople de JavaFX y JDK 26:</strong> Al utilizar un entorno moderno con OpenJDK 26, JavaFX ya no viene incluido de forma nativa. Tuvimos problemas de compatibilidad y reconocimiento de librerías. Esto lo solucionamos gestionando las dependencias mediante Maven (usando los módulos de JavaFX 21) e implementando una clase <code>Launcher</code> como envoltorio para inicializar el entorno gráfico y evitar errores de configuración de módulos. Es por eso mismo que, para compilar y utilizar la interfaz gráfica desarrollada en JavaFX, solo se debe compilar el archivo Launcher.java.</li>
+        <li><strong>Sincronización de Persistencia de Archivos:</strong> Garantizar que la lectura y escritura en el archivo <code>horario_canchas_modificado.txt</code> no lanzara excepciones de "Archivo no encontrado" en diferentes computadoras. Se resolvió manejando adecuadamente las rutas relativas en la raíz del proyecto.</li>
+        <li><strong>Limpieza del Control de Versiones:</strong> Cumplir con la restricción de subir exclusivamente código fuente a GitHub fue un reto menor. Tuvimos que aprender a configurar y hacer rollback de commits para ignorar archivos de configuración del IDE (<code>.iml</code>), directorios compilados (<code>out</code>) y enfocarnos solo en la carpeta <code>src</code> y el archivo <code>Makefile</code>.</li>
     </ul>
 
     <h3>Listado de Bugs Presentes</h3>
     <ul>
-        <li>No se registran bugs conocidos que afecten el flujo principal a la fecha de entrega.</li>
+        <li>En la versión final no se registran bugs que afecten el flujo crítico de reservas. Sin embargo, un detalle estético es que la interfaz gráfica no es completamente responsiva; si el usuario redimensiona la ventana a tamaños muy atípicos, los elementos podrían no escalar de forma ideal, aunque la funcionalidad permanece intacta.</li>
+        <li><strong>Interfaz en fase MVP (Producto Mínimo Viable):</strong> A nivel estético, la interfaz gráfica no es definitiva. Como equipo, tomamos la decisión arquitectónica de priorizar la robustez del backend, el control de concurrencia y el cumplimiento exacto de las reglas de negocio por sobre el pulido visual, asegurando la entrega de un sistema estable y funcional.</li>
     </ul>
 
-    <!-- 6. ENLACE AL CÓDIGO FUENTE (15 Puntos) -->
-    <h2 id="codigo">6. Enlace al Código Fuente y Repositorio</h2>
+    <!-- 6. ENLACE AL CÓDIGO FUENTE -->
+    <h2 id="codigo">6. Enlace al Repositorio y Video de Presentación</h2>
     <p>El proyecto completo, incluyendo el código fuente desarrollado en Java, el archivo README y la configuración del IDE se encuentra disponible de forma pública:</p>
     <p>
         <strong>Repositorio GitHub:</strong> <a href="https://github.com/VicenteASA/ELO329---Proyecto-Reservas_Deportivas" target="_blank">https://github.com/VicenteASA/ELO329---Proyecto-Reservas_Deportivas</a>
+    </p>
+    <p>El Video de Presentación del proyecto está subido en la plataforma YouTube. Se incluye el link directo:</p>
+    <p>
+        <strong>Video de Presentación: </strong>
     </p>
     <p><em>Nota: La implementación se documentó directamente en el código fuente. Las instrucciones de ejecución, el archivo base de persistencia y la configuración del JDK/JavaFX están detalladas en la raíz del repositorio. No se incluye código generado (archivos .class).</em></p>
 
