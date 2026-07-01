@@ -53,13 +53,13 @@
         </ul>
     </nav>
 
-    <!-- 1. DESCRIPCIÓN DEL PROBLEMA (10 Puntos) -->
+    <!-- 1. DESCRIPCIÓN DEL PROBLEMA -->
     <h2 id="descripcion">1. Descripción del Problema</h2>
     <p>
         Actualmente, la gestión de los recintos deportivos en la universidad se realiza mediante hojas de cálculo, un método manual que carece de control de concurrencia y visibilidad en tiempo real. Esto genera conflictos de agenda, errores en la asignación y una alta carga administrativa. Nuestro proyecto resuelve esta necesidad implementando un sistema inteligente orientado a objetos (Smart Canchas USM) que automatiza el flujo de reservas, garantizando la integridad de los datos y proporcionando una interfaz gráfica eficiente para un acceso equitativo.
     </p>
 
-    <!-- 2. ANÁLISIS DEL PROBLEMA (10 Puntos) -->
+    <!-- 2. ANÁLISIS DEL PROBLEMA -->
     <h2 id="analisis">2. Análisis del Problema</h2>
     <p>
         El problema se sitúa en el contexto universitario, específicamente en la administración de la infraestructura deportiva. El sistema actual centralizado en Excel es precario al no validar automáticamente la disponibilidad, permitiendo que dos personas reserven la misma cancha a la misma hora.
@@ -68,7 +68,7 @@
         Para modelar y dar solución a esto, se definieron los siguientes entes o elementos principales que interactúan en el sistema: <strong>Cancha</strong> (con atributos como tipo de piso o si es techada), <strong>Reserva</strong>, <strong>Cliente</strong> (Estudiante validado por Rol USM) y <strong>ComplejoDeportivo</strong>. El sistema interactúa con el medio externo a través de una interfaz gráfica (desarrollada en JavaFX) y asegura la persistencia de datos leyendo y escribiendo en un archivo de texto plano (<code>horario_canchas_modificado.txt</code>), lo que permite manejar la concurrencia y evaluar la disponibilidad en tiempo real aplicando los principios de encapsulamiento y modularidad.
     </p>
 
-    <!-- 3. DEFINICIÓN DE REQUERIMIENTOS (20 Puntos) -->
+    <!-- 3. DEFINICIÓN DE REQUERIMIENTOS -->
     <h2 id="requerimientos">3. Definición de Requerimientos</h2>
     <p>El sistema cuenta con validación de formato para el Rol USM y una regla de negocio que limita a 3 las reservas activas por usuario. A continuación se presentan los tres casos de uso principales:</p>
     
@@ -99,13 +99,12 @@
         </tbody>
     </table>
 
-    <!-- 4. DISEÑO (20 Puntos) -->
+    <!-- 4. DISEÑO  -->
     <h2 id="diseno">4. Diseño de la Solución</h2>
     
     <h3>Diagrama de Clases</h3>
     <p>El siguiente diagrama ilustra la arquitectura de nuestra solución orientada a objetos. Se observa cómo las entidades principales (Cliente, Cancha, Reserva) se relacionan y encapsulan sus atributos y métodos, separando la lógica de negocio de la interfaz gráfica implementada en JavaFX.</p>
     <div class="img-container">
-        <!-- REEMPLAZAR LA IMAGEN CUANDO LA TENGAN -->
         <img src="images/diagrama_clases.png" alt="Diagrama de Clases UML">
         <div class="caption">Figura 1: Diagrama de clases de Smart Canchas USM.</div>
     </div>
@@ -113,18 +112,16 @@
     <h3>Diagrama de Secuencia</h3>
     <p>A continuación se detalla la interacción de los objetos a lo largo del tiempo para el Caso de Uso de <strong>Realizar Reserva</strong>, mostrando la validación de concurrencia y el límite de reservas por usuario.</p>
     <div class="img-container">
-        <!-- REEMPLAZAR LA IMAGEN CUANDO LA TENGAN -->
         <img src="images/diagrama_secuencia.png" alt="Diagrama de Secuencia UML">
         <div class="caption">Figura 2: Diagrama de secuencia para realizar una reserva.</div>
     </div>
 
-    <!-- 5. PRUEBAS, DIFICULTADES Y BUGS (10 Puntos) -->
+    <!-- 5. PRUEBAS, DIFICULTADES Y BUGS -->
     <h2 id="pruebas">5. Resultados de Pruebas y Dificultades</h2>
     
     <h3>Resultados de las Pruebas de Software</h3>
     <p>Las pruebas se enfocaron en validar la manipulación de listas y condiciones en POO a través de la interfaz. La siguiente captura evidencia el control de la lógica de negocio al intentar exceder el límite permitido de agendamientos.</p>
     <div class="img-container">
-        <!-- REEMPLAZAR LA IMAGEN CUANDO LA TENGAN -->
         <img src="images/prueba_caso1.png" alt="Captura de pantalla de la prueba en JavaFX">
         <div class="caption">Figura 3: Ejecución de prueba validando el límite máximo de 3 reservas activas.</div>
     </div>
@@ -140,8 +137,8 @@
         <li>No se registran bugs conocidos que afecten el flujo principal a la fecha de entrega.</li>
     </ul>
 
-    <!-- 6. ENLACE AL CÓDIGO FUENTE (15 Puntos) -->
-    <h2 id="codigo">6. Enlace al Código Fuente y Repositorio</h2>
+    <!-- 6. ENLACE AL CÓDIGO FUENTE -->
+    <h2 id="codigo">6. Enlace al Repositorio y Video de Presentación</h2>
     <p>El proyecto completo, incluyendo el código fuente desarrollado en Java, el archivo README y la configuración del IDE se encuentra disponible de forma pública:</p>
     <p>
         <strong>Repositorio GitHub:</strong> <a href="https://github.com/VicenteASA/ELO329---Proyecto-Reservas_Deportivas" target="_blank">https://github.com/VicenteASA/ELO329---Proyecto-Reservas_Deportivas</a>
